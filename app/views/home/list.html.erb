@@ -1,0 +1,20 @@
+<h1>Test window</h1>
+<p>find me one app/views/home/list.html.erb</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Title</td>
+      <td>Body</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.body %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

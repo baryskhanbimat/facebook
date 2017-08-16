@@ -1,5 +1,8 @@
 # README
 
+[![Travis](https://api.travis-ci.org/baryskhanbimat/facebook.svg)](https://travis-ci.org/baryskhanbimat/facebook)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

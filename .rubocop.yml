@@ -121,8 +121,3 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Style/Documentation:
-  Enabled: false
-
-Style/IndentationConsistency:
-  Enabled: false

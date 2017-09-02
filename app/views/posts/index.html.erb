@@ -1,0 +1,30 @@
+<p>New post index</p>
+
+<div class="posts">
+  <% @posts.each do |post| %>
+      <div class="post">
+        <h3><%= post.title %></h3>
+        <p><%= post.created_at %></p>
+        <div class="description">
+          <p><%= post.body %></p>
+        </div>
+      </div>
+  <% end %>
+</div>
+<div class = "form_posts">
+  <%= form_for @post, remote:true do |p| %>
+      <p>
+        <%= p.label :title %><br>
+        <%= p.text_field :title %>
+      </p>
+
+      <p>
+        <%= p.label :body %><br>
+        <%= p.text_area :body %>
+      </p>
+
+      <p>
+        <%= p.submit %>
+      </p>
+  <% end %>
+</div>

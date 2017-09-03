@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  respond_to :js, :json
+  respond_to :js
 
   def index
     @post = Post.new

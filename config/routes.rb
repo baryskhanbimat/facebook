@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'home/list'
-  root 'home#list'
+  root 'posts#index'
 
   resources :posts
 

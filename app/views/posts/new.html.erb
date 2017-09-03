@@ -1,7 +1,7 @@
 <p>New post</p>
 
 
-<%= form_for @post do |p| %>
+<%= form_for @post, remote:true do |p| %>
     <p>
       <%= p.label :title %><br>
       <%= p.text_field :title %>

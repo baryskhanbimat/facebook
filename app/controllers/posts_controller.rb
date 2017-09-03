@@ -1,15 +1,14 @@
 class PostsController < ApplicationController
-  def new
+  respond_to :js
+
+  def index
     @post = Post.new
+    respond_with @posts = Post.all
   end
 
   def create
     @post = Post.create!(post_params)
-    redirect_to @post
-  end
-
-  def show
-    @post = Post.find(params[:id])
+    respond_with @posts = Post.all
   end
 
   private

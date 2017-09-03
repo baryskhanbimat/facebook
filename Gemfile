@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'responders'
 # rubocop
 gem 'rubocop-rails'
 
@@ -45,8 +45,10 @@ group :development, :test do
   # debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :test do

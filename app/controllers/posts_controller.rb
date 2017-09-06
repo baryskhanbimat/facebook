@@ -1,14 +1,17 @@
 class PostsController < ApplicationController
   respond_to :js
+  before_action :authenticate_user!
 
   def index
-    @post = Post.new
+    @post = current_user.posts.build
     respond_with @posts = Post.all
   end
 
   def create
-    @post = Post.create!(post_params)
+    @post = current_user.posts.build(post_params)
+    @post.save!
     respond_with @posts = Post.all
+    # mail to: 'baryskhan.bimat@ce.sdu.edu.kz', subject: 'Test'
   end
 
   private

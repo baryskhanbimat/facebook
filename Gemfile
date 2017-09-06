@@ -36,6 +36,8 @@ gem 'responders'
 # rubocop
 gem 'rubocop-rails'
 
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -47,12 +49,16 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'capybara'
+  gem 'capybara-email'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
 end
 
 group :development do

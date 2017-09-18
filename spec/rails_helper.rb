@@ -10,7 +10,6 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'shoulda-matchers'
 require 'database_cleaner'
-require 'capybara/email/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -38,6 +37,10 @@ Capybara.javascript_driver = :poltergeist
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.include Warden::Test::Helpers
+
+  Warden.test_mode!
   # config.include Devise::TestHelpers, :type => :controller
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

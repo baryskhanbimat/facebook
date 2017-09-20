@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user, class: User do
-    email 'baryskhan17@gmail.com'
+    email 'baryskhan.bimat@ce.sdu.edu.kz'
     password 'united'
   end
 end

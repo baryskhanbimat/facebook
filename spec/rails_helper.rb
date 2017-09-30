@@ -7,7 +7,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
+# require 'capybara/poltergeist'
 require 'shoulda-matchers'
 require 'database_cleaner'
 
@@ -32,11 +32,41 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
-Capybara.javascript_driver = :poltergeist
+# require "selenium/webdriver"
+
+Capybara.register_driver :chrome do |app|
+  require 'selenium/webdriver'
+  # Selenium::WebDriver::Chrome.driver_path = ENV['CHROMEDRIVER_EXECUTABLE']
+  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: { 'chromeOptions' => { 'args' => %w[{window-size=1920,1080 no-sandbox user-data-dir=/root}] } })
+end
+
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end
+#
+Capybara.javascript_driver = :chrome
+
+# Capybara.javascript_driver = :poltergeist
+
+# Capybara.javascript_driver = :webkit
+
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.include WaitForAjax, type: :feature
 
   config.include Warden::Test::Helpers
 

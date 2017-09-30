@@ -1,7 +1,21 @@
 <div class="post">
-  <h3><%= @post.title %></h3>
-  <p><%= @post.created_at %></p>
-  <div class="description">
-    <p><%= @post.body %></p>
-  </div>
+  <% @posts.each do |post| %>
+      <div class="panel panel-default post">
+        <h3><%= post.title %></h3>
+        <span><%= time_ago_in_words(post.created_at)%> ago</span>
+        <div class="description">
+          <p><%= post.body %></p>
+        </div>
+        <hr />
+        <div class="comments_<%= post.id %>">
+          <p><%= post.comments.count %> comments</p>
+          <div id="comment">
+            <% if post.comments.any? %>
+                <%= render :partial => 'comments/comment', locals: {post: post} %>
+            <% end %>
+          </div>
+          <%= render :partial => 'comments/form', locals: {post: post} %>
+        </div>
+      </div>
+  <% end %>
 </div>

@@ -3,39 +3,43 @@
     <div class="panel panel-default">
       <div class = "form_posts">
         <div class="panel-body">
-        <%= simple_form_for @post, remote:true do |p| %>
+        <%= bootstrap_form_for @post, remote:true do |p| %>
             <div class="form-inputs">
               <div class="form-group">
-                <%= p.input :title, autofocus: true, required: false,  input_html: {class: 'from-control'} %>
+                <%= p.text_field :title, autofocus: true, required: false,  input_html: {class: 'from-control'} %>
               </div>
               <div class="form-group">
-                <%= p.input :body, autofocus: true, required: false,  input_html: {class: 'from-control'} %>
+                <%= p.text_area :body, autofocus: true, required: false,  input_html: {class: 'from-control'} %>
               </div>
             </div>
             <div class="form-actions">
-              <%= p.submit 'Save', class: 'btn btn-primary' %>
+              <%= p.submit 'Save', id: 'SavePost', class: 'btn btn-primary' %>
             </div>
         <% end %>
         </div>
       </div>
     </div>
-    <div class=" posts">
-      <% @posts.each do |post| %>
-          <div class="panel panel-default post">
-            <h3><%= post.title %></h3>
-            <span><%= time_ago_in_words(post.created_at)%> ago</span>
-            <div class="description">
-              <p><%= post.body %></p>
-            </div>
-            <hr />
-            <div id="comments">
-              <p><%= post.comments.count %> comments</p>
-              <%= render post.comments %>
-              <p>Add a comment</p>
+    <div class="posts">
+      <div class="post">
+        <% @posts.each do |post| %>
+            <div class="panel panel-default post">
+              <h3><%= post.title %></h3>
+              <span><%= time_ago_in_words(post.created_at)%> ago</span>
+              <div class="description">
+                <p><%= post.body %></p>
+              </div>
+              <hr />
+              <div class="comments_<%= post.id %>">
+                <p><%= post.comments.count %> comments</p>
+
+                <%= render :partial => 'comments/comment', locals: {post: post} %>
+
+
+              </div>
               <%= render :partial => 'comments/form', locals: {post: post} %>
             </div>
-          </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,20 +1,18 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   respond_to :html
 
   def index
-    @friendships = Friendship.all
+    @users = User.all
+    @friendships = current_user.friendships.all
     respond_with(@friendships)
   end
 
-  def show
-    @user = current_user
-  end
-
   def create
-    @friendship = current_user.friendships.build(friend_id: params[:friend_id])
-    if @friendship.save
+    @friendship = current_user.friendships.create(user_id: current_user.id, friend_id: params[:friend_id]) unless friendship_exists?
+    if @friendship.present? && @friendship.save
       flash[:notice] = 'Added friend.'
     else
       flash[:error] = 'Unable to add friend.'
@@ -36,6 +34,10 @@ class FriendshipsController < ApplicationController
     end
 
     def friendship_params
-      params.require(:friendship).permit(:user_id, :friend_id, :create, :destroy)
+      params.require(:friendship).permit(:user_id, :friend_id)
+    end
+
+    def friendship_exists?
+      Friendship.where(user_id: current_user.id, friend_id: params[:friend_id]).count > 0
     end
 end

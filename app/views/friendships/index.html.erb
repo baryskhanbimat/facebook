@@ -1,6 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Friends</h2>
 
-<p>Username</p>
+<p>Username: <%=h current_user.email %></p>
+
+
+<h2>Friends</h2>
+<ul>
+  <% current_user.friendships.each do |friendship| %>
+      <li>
+        <%=h friendship.friend.email %>
+        (<%= link_to 'remove', friendship, :method => :delete %>)
+      </li>
+  <% end %>
+</ul>
+
+<h2>Friended by Users</h2>
+<ul>
+  <% current_user.inverse_friends.each do |user| %>
+      <li><%=h user.email %></li>
+  <% end %>
+</ul>
+
+
+<h2>All users</h2>
+
+<div id="users">
+  <% @users.each do |user| %>
+      <div class="user">
+        <% if current_user.not_friends_with?(user.id) %>
+            <% if user.email != current_user.email %>
+                <p>
+                  <strong><%= user.email %></strong>
+                  <%= link_to 'Add Friend', friendships_path(:friend_id => user), :method => :post %>
+                <div class="clear"></div>
+                </p>
+            <% end %>
+        <% end %>
+      </div>
+  <% end %>
+</div>
 

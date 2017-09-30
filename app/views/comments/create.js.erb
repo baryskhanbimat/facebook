@@ -1,1 +1,1 @@
-$('.comment').append('<%= j render @post.comments %>');
+$('.comments_<%= @post.id %>').html('<%= j render :partial => 'comment', locals: {post: @post} %>');

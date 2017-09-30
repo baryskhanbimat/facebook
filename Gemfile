@@ -22,6 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'simple_form'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -38,6 +39,8 @@ gem 'responders'
 gem 'rubocop-rails'
 
 gem 'devise'
+
+gem 'cancancan', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -72,6 +75,7 @@ group :development do
   # background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'nifty-generators'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

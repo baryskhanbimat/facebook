@@ -13,10 +13,14 @@ feature 'User log in and add post' do
     fill_in 'post[title]', with: 'test title'
     fill_in 'post[body]', with: 'test body'
 
+    File.write('1.html', page.body)
+
     click_button 'Save'
 
-    expect(page).to have_content('Тема Body')
-    expect(page).to have_content('Тема Body')
+    File.write('2.html', page.body)
+
+    expect(page).to have_content('test title')
+    expect(page).to have_content('test body')
   end
 
   scenario 'they see Invalid Email or password on the page' do

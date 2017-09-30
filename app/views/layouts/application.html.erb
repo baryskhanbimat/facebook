@@ -16,6 +16,8 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Friends', user_show_path %></li>
+              <li><%= link_to 'Profile', user_index_path %></li>
               <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
             </ul>
           <% else %>

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @post = current_user.posts.build
-    respond_with @posts = Post.all
+    respond_with @posts = Post.all.order('created_at DESC')
   end
 
   def create

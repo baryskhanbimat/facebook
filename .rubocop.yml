@@ -137,7 +137,7 @@ Metrics/MethodLength:
   Max: 23
 
 Metrics/BlockLength:
-  Max: 50
+  Max: 250
 
 Style/AsciiComments:
   Enabled: false

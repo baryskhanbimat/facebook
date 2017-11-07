@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friendships
   get 'home/list'
   root 'posts#index'
 
@@ -8,7 +9,11 @@ Rails.application.routes.draw do
     get 'sign_in', to: 'devise/sessions#new'
   end
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+  get 'user/index'
+  get 'user/show'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

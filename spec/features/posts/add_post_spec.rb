@@ -5,18 +5,26 @@ feature 'User log in and add post' do
 
   before { login_as(user, scope: :user) }
 
-  scenario 'user can add posts', js: true do
+  background do
     p user
-
     visit root_path
+  end
 
-    fill_in 'post[title]', with: 'test title'
-    fill_in 'post[body]', with: 'test body'
+  scenario 'user can add posts', js: true do
+    fill_in :post_title, with: 'test title'
+    fill_in :post_body, with: 'test body'
+    find('input[name="commit"]').click
 
-    click_button 'Save'
+    p URI.parse(current_url).to_s
+    # sleep(60)
+    # File.write('2.html', page.body)
+    # expect { subject }.to change(Post, :count).by(1)
+    expect(page).to have_content('test title')
+    expect(page).to have_content('test body')
 
-    expect(page).to have_content('Тема Body')
-    expect(page).to have_content('Тема Body')
+    fill_in :comment_body, with: 'test comment'
+    click_button 'Send'
+    expect(page).to have_content('test comment')
   end
 
   scenario 'they see Invalid Email or password on the page' do
@@ -28,5 +36,9 @@ feature 'User log in and add post' do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid Email or password')
+  end
+
+  scenario 'Anonymous user cant add comment to post' do
+    expect(page).to_not have_content 'comments'
   end
 end

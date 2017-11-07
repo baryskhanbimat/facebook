@@ -4,13 +4,14 @@ class PostsController < ApplicationController
 
   def index
     @post = current_user.posts.build
-    respond_with @posts = Post.all
+    # @comment = current_user.posts.comment.all
+    respond_with @posts = Post.all.order('created_at DESC')
   end
 
   def create
     @post = current_user.posts.build(post_params)
     @post.save!
-    respond_with @posts = Post.all
+    respond_with @posts = Post.all.order('created_at DESC')
     # mail to: 'baryskhan.bimat@ce.sdu.edu.kz', subject: 'Test'
   end
 

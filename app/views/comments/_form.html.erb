@@ -1,0 +1,12 @@
+<div class="panel-body">
+  <%= bootstrap_form_for [post, post.comments.build], remote: true do |f| %>
+      <div class="form-inputs">
+        <div class="form-group">
+          <%= f.text_field :body, autofocus: true, required: false, input_html: {class: 'from-control'} %>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.submit 'Send', class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+</div>
